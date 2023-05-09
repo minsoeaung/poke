@@ -8,5 +8,8 @@
     "axios-cache-interceptor": "^1.0.1",
     "pokeapi-js-wrapper": "^1.2.2",
     "pokenode-ts": "^1.18.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
   }
 }
