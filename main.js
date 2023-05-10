@@ -8,6 +8,7 @@ const {
   getStatTotal,
   getGenderPercentage,
   getEvYield,
+  getEvolution,
 } = require("./utils");
 
 const api = new MainClient();
@@ -24,6 +25,9 @@ const api = new MainClient();
     const pokemonData = await api.pokemon.getPokemonByName(name);
     const speciesData = await api.pokemon.getPokemonSpeciesByName(
       pokemonData.species.name
+    );
+    const { data: evolutionsData } = await axios.get(
+      speciesData.evolution_chain.url
     );
     const text =
       speciesData.flavor_text_entries.find(
@@ -81,7 +85,7 @@ const api = new MainClient();
         speed: [getStatNumberByNameFromPokemonData(pokemonData, "speed")],
         total: [getStatTotal(pokemonData.stats)],
       },
-      evolutions: [],
+      evolutions: getEvolution(evolutionsData),
     };
     RESULTS.push(usablePokemonData);
     console.log(`Pushed for ${name}`);
