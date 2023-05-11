@@ -1,4 +1,4 @@
-const nameAndIds = require("./namdAndIds.json");
+const nameAndIds = require("./raw_data_jsons/namdAndIds.json");
 
 function getHeightString(height) {
   // input: The height of the Pokémon, in tenths of a meter (decimeters)
@@ -81,12 +81,12 @@ function getEvolution(evolutionChain) {
   for (let i = 0; i < chain.length - 1; i++) {
     const from = chain[i];
     const to = chain[i + 1];
-    if (results.at(-1) !== nameAndIds[from.speciesName]) {
-      results.push(nameAndIds[from.speciesName]);
+    if (results.at(-1) !== from.speciesName) {
+      results.push(from.speciesName);
     }
     if (to) {
       results.push(getEvoTrigger(to));
-      results.push(nameAndIds[to.speciesName]);
+      results.push(to.speciesName);
     }
   }
 
